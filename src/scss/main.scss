@@ -1,0 +1,575 @@
+body {
+    font-family: Arial;
+    padding: 0;
+    margin: 0;
+}
+
+button {
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    padding: 0;
+}
+
+$dark-green: #83c79d;
+$dark-green-hover: #619675;
+$white: #ffffff;
+$transition-speed: 0.3s;
+$btn-close-menu: #9b88b9;
+$dark-blue: #7ba9c4;
+$dark-blue-hover: #5d8196;
+$background-nav-mobile: #D6BDFF;
+$background-desktop: #ffcaef;
+$dark-purple: rgb(194, 130, 231);
+$dark-purple-hover: #9761af;
+
+.container-content {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    max-width: 290px;
+    width: 100%;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ADFCC8;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.menu-container {
+    position: relative;
+}
+
+.burger {
+    position: relative;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all $transition-speed ease;
+
+    &__line {
+        background-color: $dark-green;
+        width: 24px;
+        height: 5px;
+        border-radius: 2px;
+        transition: all $transition-speed ease;
+        transform-origin: center;
+    }
+
+    &[aria-expanded="true"] {
+        .burger__line {
+            &:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+                background-color: $btn-close-menu;
+            }
+
+            &:nth-child(2) {
+                opacity: 0;
+            }
+
+            &:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+                background-color: $btn-close-menu;
+            }
+        }
+    }
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: $white;
+    transform: translateX(-100%);
+    transition: transform $transition-speed ease;
+    z-index: 90;
+    background: $background-nav-mobile;
+
+    &[aria-hidden="false"] {
+        transform: translateX(0);
+    }
+
+
+    &__icon {
+        width: 31px;
+        height: 31px;
+        border-radius: 100%;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
+        margin-top: 66px;
+        padding: 0 22px;
+        max-height: 85vh;
+        overflow: auto;
+
+
+        /* Стилизация скроллбара */
+        &::-webkit-scrollbar {
+            width: 3px;
+            /* Ширина вертикального скроллбара */
+        }
+
+        /* Дорожка скроллбара */
+        &::-webkit-scrollbar-track {
+            background: $background-nav-mobile;
+            border-radius: 4px;
+        }
+
+        /* Ползунок скроллбара */
+        &::-webkit-scrollbar-thumb {
+            background: $btn-close-menu;
+            border-radius: 4px;
+
+            &:hover {
+                background: #cf72c1;
+            }
+        }
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        column-gap: 22px;
+        font-size: 14px;
+        padding: 9px 13px;
+        cursor: pointer;
+
+
+
+        span {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 170px;
+        }
+    }
+
+    &__item:hover {
+        background-color: #FF39EB;
+        border-radius: 30px;
+    }
+}
+
+// Блокировка скролла при открытом меню
+body.menu-open {
+    overflow: hidden;
+}
+
+
+.figures-header {
+    display: flex;
+    column-gap: 10px;
+
+    div {
+        &:nth-child(1) {
+            clip-path: polygon(0% 0%, 85% 50%, 0% 100%);
+            border-radius: 2px;
+        }
+
+        &:nth-child(2) {
+            border-radius: 100%;
+        }
+
+        &:nth-child(3) {
+            border-radius: 4px;
+        }
+
+        cursor: pointer;
+        width: 23px;
+        height: 23px;
+        background: $dark-green;
+    }
+
+    div:hover {
+        background: $dark-green-hover;
+    }
+}
+
+main {
+    background-color: rgb(229, 252, 229);
+}
+
+.container-main {
+    padding: 26px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 19px;
+    justify-content: center;
+    overflow: hidden;
+
+
+
+
+
+
+    // Скрываем последнюю карточку, если она одна в строке
+    .wrapper-content {
+        &:nth-child(2n+1):last-child {
+            display: none;
+        }
+    }
+
+
+
+    .wrapper-content {
+        height: 115px;
+        width: 115px;
+        background-color: $dark-green;
+        border-radius: 10px;
+        display: flex;
+        cursor: pointer;
+        transition: $transition-speed;
+
+        .content {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
+            overflow: hidden;
+            max-height: 90px;
+            line-height: 1.5;
+            padding: 10px;
+        }
+    }
+
+    .wrapper-content:hover {
+        transform: translateY(-5px);
+        transition: $transition-speed;
+    }
+}
+
+footer {
+    padding: 26px 15px;
+    background-color: #ADFCC8;
+
+    div:nth-child(1) {
+        color: black;
+        font-weight: 700;
+        font-size: 14px;
+    }
+
+    div:nth-child(2) {
+        color: black;
+        font-weight: 500;
+        font-size: 12px;
+        margin-top: 5px;
+        line-height: 17px;
+    }
+}
+
+
+
+@media (min-width: 291px) and (max-width: 610px) {
+    .container {
+        max-width: 610px;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    header {
+        background-color: #95D9FF;
+    }
+
+    .figures-header {
+        div {
+            background: $dark-blue;
+        }
+
+        div:hover {
+            background: $dark-blue-hover;
+        }
+    }
+
+    .burger {
+
+        &__line {
+            background-color: $dark-blue;
+        }
+
+        &[aria-expanded="true"] {
+            .burger__line {
+                &:nth-child(1) {
+                    background-color: $btn-close-menu;
+                }
+
+                &:nth-child(3) {
+                    background-color: $btn-close-menu;
+                }
+            }
+        }
+    }
+
+    .menu {
+        width: 290px;
+    }
+
+    // Разблокировать скролл при открытом меню
+    body.menu-open {
+        overflow: unset;
+    }
+
+
+
+    main {
+        height: 100%;
+        background-color: rgb(203, 247, 250);
+    }
+
+    .container-main {
+
+
+        .wrapper-content {
+            height: 128px;
+            flex: 1 0 calc(33.333% - 16px);
+            min-width: 120px;
+            max-width: calc(33.333% - 30px);
+            background-color: $dark-blue;
+            cursor: pointer;
+            transition: $transition-speed;
+
+            @media (min-width: 291px) and (max-width: 397px) {
+                &:nth-child(2n+1):last-child {
+                    display: none;
+                }
+            }
+
+            @media (min-width: 398px) and (max-width: 610px) {
+
+                // Скрываем последний ряд, если в нём 1 или 2 карточки
+                &:nth-child(3n+1):nth-last-child(-n+2),
+                // Если осталось 2 карточки
+                &:nth-child(3n+1):nth-last-child(-n+2)~.wrapper-content,
+                // И их соседей
+                &:nth-child(3n+1):last-child,
+                // Если осталась 1 карточка (первая в ряду)
+                &:nth-child(3n+2):last-child {
+                    // Если осталась 1 карточка (вторая в ряду)
+                    display: none;
+                }
+            }
+
+            .content {
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 4;
+                overflow: hidden;
+                max-height: 90px;
+                line-height: 1.5;
+                padding: 10px;
+            }
+        }
+
+        .wrapper-content:hover {
+            transform: translateY(-5px);
+            transition: $transition-speed;
+        }
+    }
+
+
+    footer {
+        padding: 26px 15px;
+        background-color: #95D9FF;
+    }
+
+
+}
+
+
+
+@media (min-width: 611px) {
+    .container {
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        transition: transform $transition-speed ease;
+        // Десктоп: сдвигаем контент на ширину меню
+        margin-left: 310px;
+    }
+
+    // Основной контейнер страницы
+    body {
+        transition: transform $transition-speed ease;
+        position: relative;
+        left: 0;
+
+
+    }
+
+    nav {
+        border-right: 2px solid rgb(136, 133, 133);
+    }
+
+    // Контейнер меню
+    .menu-container {
+        position: fixed;
+        top: 0;
+        left: -310px; // Скрыто за пределами экрана
+        width: 310px;
+        height: 100vh;
+        z-index: 1000;
+        transition: left $transition-speed ease;
+        background: $background-desktop;
+
+        // Десктоп: всегда видимо
+        left: 0;
+
+        ul {
+            margin-top: 30px;
+
+
+        }
+
+        // Когда меню открыто (мобильные)
+        .menu[aria-hidden="false"] & {
+            left: 0;
+        }
+    }
+
+
+    // Бургер-кнопка
+    .burger {
+        display: none;
+    }
+
+    // Меню
+    .menu {
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        background-color: $background-desktop;
+        // Десктоп: убираем fixed-позиционирование
+        position: static;
+
+        &__list {
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE/Edge */
+            max-height: 81vh;
+        }
+    }
+
+    header {
+        justify-content: end;
+        background-color: $background-desktop;
+    }
+
+
+    .figures-header {
+        div {
+            background-color: $dark-purple;
+        }
+
+        div:hover {
+            background-color: $dark-purple-hover;
+        }
+    }
+
+    main {
+        height: 100%;
+        background-color: $background-desktop;
+
+        .container-main {
+            padding: 15px;
+
+            .wrapper-content {
+                background-color: $dark-purple;
+            }
+        }
+    }
+
+
+    .wrapper-content {
+        height: 128px;
+        flex: 1 0 calc(25% - 16px);
+        min-width: 130px;
+        max-width: calc(33.333% - 30px);
+        background-color: $dark-blue;
+        cursor: pointer;
+        transition: $transition-speed;
+
+
+
+        @media (min-width: 618px) and (max-width: 767px) {
+            &:nth-child(2n+1):last-child {
+                display: none;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 916px) {
+
+            // Скрываем последний ряд, если в нём 1 или 2 карточки
+            &:nth-child(3n+1):nth-last-child(-n+2),
+            // Если осталось 2 карточки
+            &:nth-child(3n+1):nth-last-child(-n+2)~.wrapper-content,
+            // И их соседей
+            &:nth-child(3n+1):last-child,
+            // Если осталась 1 карточка (первая в ряду)
+            &:nth-child(3n+2):last-child {
+                // Если осталась 1 карточка (вторая в ряду)
+                display: none;
+            }
+        }
+
+        @media (min-width: 917px) {
+
+            // Скрытие неполных рядов
+            &:nth-child(4n+1):nth-last-child(-n+3),
+            &:nth-child(4n+1):nth-last-child(-n+3)~.wrapper-content,
+            &:nth-child(4n+1):nth-last-child(-n+2),
+            &:nth-child(4n+1):nth-last-child(-n+2)~.wrapper-content,
+            &:nth-child(4n+1):last-child,
+            &:nth-child(4n+2):last-child,
+            &:nth-child(4n+3):last-child {
+                display: none;
+            }
+        }
+
+        .content {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
+            overflow: hidden;
+            max-height: 90px;
+            line-height: 1.5;
+            padding: 10px;
+        }
+    }
+
+    .wrapper-content:hover {
+        transform: translateY(-5px);
+        transition: $transition-speed;
+    }
+
+    footer {
+        max-width: auto;
+        position: relative;
+        left: 0;
+        right: 0;
+        background: $background-desktop;
+        z-index: 200;
+        margin-left: -310px;
+        border-top: 2px solid rgb(136, 133, 133);
+    }
+
+}
